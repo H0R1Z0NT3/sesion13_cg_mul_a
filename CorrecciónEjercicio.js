@@ -2,9 +2,9 @@
 var scene = new THREE.Scene();
     var dim;
     var angulo1;
-    dim=prompt('Ingrese el largo del cubo mayor:',''); //Creamos una variable dim para poder crear nuestro array de cubos :)
-    angulo1=prompt('Ingrese el ángulo de rotación (ingreselo en grados):',''); //Ángulo de rotación para los cubos 1 y 3
-    angulo=angulo1*(Math.PI/180);
+    dim = prompt('Ingrese el largo del cubo mayor:',''); //Creamos una variable dim para poder crear nuestro array de cubos :)
+    angulo1 = prompt('Ingrese el ángulo de rotación (ingreselo en grados):',''); //Ángulo de rotación para los cubos 1 y 3
+    angulo = angulo1*(Math.PI/180);
 
 function cubo(x, y, z, color, material, alambrado) { //Aquí, tenemos una función cubo donde crearemos los cubos para la escena
     var cubeGeometry = new THREE.BoxGeometry(x, y, z); //Se crea la geometría del cubo
@@ -59,7 +59,7 @@ function init() {
 
     //Creamos el render para generar los objetos puestos en escena
     var renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(new THREE.Color(0x000000));
+    renderer.setClearColor(new THREE.Color(0xF0F0F0));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     //Mostramos los ejes del espacio para poder visualizarlos 
@@ -94,12 +94,12 @@ function init() {
 
     //Luz (requerida para el material)
     light = new THREE.PointLight(0xFFFF00); //Luz proveniente de un punto en el espacio, semejante al sol
-    light.position.set(-3, 5, 10); //  Localización de la luz en las tres dimensiones
+    light.position.set(dim*1.2, dim*2.5, dim*3); //  Localización de la luz en las tres dimensiones
     scene.add(light);
 
 
     //Posicionamiento de la cámara en el mundo tridimensional
-    camera.position.set(1.2, 2.7, 3.5);
+    camera.position.set(dim*1.2, dim*2.5, dim*3);
     camera.lookAt(scene.position);
 
     document.getElementById("webgl-output").appendChild(renderer.domElement);
