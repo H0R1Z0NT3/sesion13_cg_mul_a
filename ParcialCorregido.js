@@ -64,7 +64,7 @@ function init() {
     dim = 1;//Creamos una variable dim para poder crear nuestro array de cubos :)
     let Cubo = [];//Este es el arreglo de cubos
     for (var i = 0; i < 3; i++) {
-        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Basic', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
+        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 'red', 'Physical', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
     }
 
     //Se trasladan los tres cubos al nuevo origen de coordenadas

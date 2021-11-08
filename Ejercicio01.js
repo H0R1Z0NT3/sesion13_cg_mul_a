@@ -4,39 +4,39 @@ var scene = new THREE.Scene();
 function cubo(x, y, z, color, material, alambrado) { //Aquí, tenemos una función cubo donde crearemos los cubos para la escena
     var cubeGeometry = new THREE.BoxGeometry(x, y, z); //Se crea la geometría del cubo
     var cubeMaterial;
-    var balde = Math.floor(Math.random() * 16777215).toString(16); //Se intenta agregar un randomizador de color pero no funciona :(
+    var color = color;
     switch (material) {
         case 'Basic':
             cubeMaterial = new THREE.MeshBasicMaterial({
-                color: '0x' + balde,
+                color: color,
                 wireframe: alambrado
             });
             break;
 
         case 'Standard':
             cubeMaterial = new THREE.MeshStandardMaterial({
-                color: '0x' + balde,
+                color: color,
                 wireframe: alambrado
             });
             break;
 
         case 'Physical':
             cubeMaterial = new THREE.MeshPhysicalMaterial({
-                color: '0x' + balde,
+                color: color,
                 wireframe: alambrado
             });
             break;
 
         case 'Phong':
             cubeMaterial = new THREE.MeshPhongMaterial({
-                color: '0x' + balde,
+                color: color,
                 wireframe: alambrado
             });
             break;
 
         case 'Lambert':
             cubeMaterial = new THREE.MeshLambertMaterial({
-                color: '0x' + balde,
+                color: color,
                 wireframe: alambrado
             });
             break;
@@ -62,9 +62,10 @@ function init() {
     scene.add(axes);
 
     dim = 1;//Creamos una variable dim para poder crear nuestro array de cubos :)
+    angulo = Math.PI/4;
     let Cubo = [];//Este es el arreglo de cubos
     for (var i = 0; i < 3; i++) {
-        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Basic', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
+        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Physical', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
     }
 
     //Se trasladan los tres cubos al nuevo origen de coordenadas
@@ -83,7 +84,17 @@ function init() {
              Cubo[i].translateY(unidades); //Función que traslada el cubo a su posición determinada en y
         }
     }
+
+    //Rotación de los cubos 1 y 3
+    Cubo[0].rotateY(angulo);
+    Cubo[2].rotateY(angulo);
    
+   //Reubicación de los cubos para que no queden montados sobre los ejes
+   dim2 = 0;
+   for(i=0; i<3; i++){ 
+        Cubo[i].translateX(dim2);
+        Cubo[i].translateZ(dim2);
+    }
     //Luz (requerida para el material)
     light = new THREE.PointLight(0xFFFF00); //Luz proveniente de un punto en el espacio, semejante al sol
     light.position.set(-3, 5, 10); //  Localización de la luz en las tres dimensiones

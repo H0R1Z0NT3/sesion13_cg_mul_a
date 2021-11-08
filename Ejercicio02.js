@@ -62,9 +62,10 @@ function init() {
     scene.add(axes);
 
     dim = 1;//Creamos una variable dim para poder crear nuestro array de cubos :)
+    angulo = Math.PI/4; //Ángulo de rotación para los cubos 1 y 3
     let Cubo = [];//Este es el arreglo de cubos
     for (var i = 0; i < 3; i++) {
-        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Basic', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
+        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Physical', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
     }
 
     //Se trasladan los tres cubos al nuevo origen de coordenadas
@@ -84,6 +85,10 @@ function init() {
         }
     }
    
+    //Rotación de los cubos 1 y 3
+    Cubo[0].rotateY(angulo);
+    Cubo[2].rotateY(angulo);
+
     //Luz (requerida para el material)
     light = new THREE.PointLight(0xFFFF00); //Luz proveniente de un punto en el espacio, semejante al sol
     light.position.set(-3, 5, 10); //  Localización de la luz en las tres dimensiones
