@@ -1,5 +1,10 @@
 // Creamos una escena donde vamos a posicionar nuestros objetos respectivos
 var scene = new THREE.Scene();
+    var dim;
+    var angulo1;
+    dim=prompt('Ingrese el largo del cubo mayor:',''); //Creamos una variable dim para poder crear nuestro array de cubos :)
+    angulo1=prompt('Ingrese el ángulo de rotación (ingreselo en grados):',''); //Ángulo de rotación para los cubos 1 y 3
+    angulo=angulo1*(Math.PI/180);
 
 function cubo(x, y, z, color, material, alambrado) { //Aquí, tenemos una función cubo donde crearemos los cubos para la escena
     var cubeGeometry = new THREE.BoxGeometry(x, y, z); //Se crea la geometría del cubo
@@ -61,10 +66,9 @@ function init() {
     var axes = new THREE.AxesHelper(1000);
     scene.add(axes);
 
-    dim = 1;//Creamos una variable dim para poder crear nuestro array de cubos :)
     let Cubo = [];//Este es el arreglo de cubos
     for (var i = 0; i < 3; i++) {
-        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 'red', 'Physical', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
+        let nuevoCubo = Cubo.push(cubo(dim, dim, dim, 0x69DD70, 'Lambert', false));//Acá creamos como tal los cubos haciendo uso de un for y la función cubo, creándolos de dimensión 1x1x1
     }
 
     //Se trasladan los tres cubos al nuevo origen de coordenadas
@@ -84,13 +88,18 @@ function init() {
         }
     }
    
+    //Rotación de los cubos 1 y 3
+    Cubo[0].rotateY(angulo);
+    Cubo[2].rotateY(angulo);
+
     //Luz (requerida para el material)
     light = new THREE.PointLight(0xFFFF00); //Luz proveniente de un punto en el espacio, semejante al sol
     light.position.set(-3, 5, 10); //  Localización de la luz en las tres dimensiones
     scene.add(light);
 
+
     //Posicionamiento de la cámara en el mundo tridimensional
-    camera.position.set(-5, 3, 3);
+    camera.position.set(1.2, 2.7, 3.5);
     camera.lookAt(scene.position);
 
     document.getElementById("webgl-output").appendChild(renderer.domElement);
